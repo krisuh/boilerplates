@@ -1,4 +1,4 @@
-function factorial(n: number) {
+export function factorial(n: number) {
     let result = 1;
     let i = 1;
     while (i <= n) {
@@ -9,7 +9,7 @@ function factorial(n: number) {
 }
 
 const data = [
-    1,2,3,4,5,6,7
+    1,2,3,4,5,6,7,8,9,10
 ];
 
 for (const n of data) {

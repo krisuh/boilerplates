@@ -4,7 +4,7 @@ export function groupBy<T>(list: T[], getItemKey: (item: T) => string): { readon
         const group = acc[key] ?? [];
         group.push(cur);
         return { ...acc, [key]: group };
-    }, {});
+    }, {} as { readonly [key: string]: T[] });
 }
 
 interface Person {
@@ -27,7 +27,7 @@ function getFirstName(item: Person) {
     return item.firstname ?? 'noName';
 }
 
-function getAgeGreaterThan(age: number): (item: Person) => string {
+function ageGreaterThan(age: number): (item: Person) => string {
     return (item: Person) => {
         if (!item.age) {
             return 'noAge';
@@ -37,6 +37,6 @@ function getAgeGreaterThan(age: number): (item: Person) => string {
 }
 
 const groupedByFirstname = groupBy(demodata, getFirstName);
-const groupedByAge = groupBy(demodata, getAgeGreaterThan(30));
+const groupedByAge = groupBy(demodata, ageGreaterThan(30));
 console.log(JSON.stringify(groupedByFirstname, null, 2));
 console.log(JSON.stringify(groupedByAge, null, 2));

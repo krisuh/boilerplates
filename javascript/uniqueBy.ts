@@ -1,8 +1,8 @@
-export function uniqueBy<T>(items: T[], getKeyCb: (item: T) => string): T[] {
+export function uniqueBy<T>(items: T[], getKeyCallBack: (item: T) => string): T[] {
     const uniqueKeys: string[] = [];
     const uniqueValues: T[] = [];
     for (const item of items) {
-        const key = getKeyCb(item);
+        const key = getKeyCallBack(item);
         if (!uniqueKeys.includes(key)) {
             uniqueKeys.push(key);
             uniqueValues.push(item);
@@ -11,8 +11,13 @@ export function uniqueBy<T>(items: T[], getKeyCb: (item: T) => string): T[] {
     return uniqueValues;
 }
 
+interface Person {
+    firstName: string;
+    lastName: string;
+}
 
-const demodata = [
+
+const demodata: Person[] = [
     { firstName: 'Erkki', lastName: 'Hervanta' },
     { firstName: 'Max', lastName: 'Power' },
     { firstName: 'Maxine', lastName: 'Power' },
@@ -21,9 +26,15 @@ const demodata = [
     { firstName: 'Foo', lastName: 'Bar' },
 ];
 
-function  getLastName(item = { firstName: '', lastName: '' }) {
+function  getLastName(item: Person): string {
     return item.lastName;
 }
 
-const result = uniqueBy(demodata, getLastName);
-console.log(result);
+function getFirstName(item: Person): string {
+    return item.firstName;
+}
+
+const uniqueLastNames = uniqueBy(demodata, getLastName).map(getLastName);
+const uniqueFirstNames = uniqueBy(demodata, getFirstName).map(getFirstName);
+console.log(uniqueLastNames);
+console.log(uniqueFirstNames);

@@ -1,4 +1,4 @@
-import { uniqueBy } from "./uniqueBy";
+import { uniqueBy } from "./uniqueBy.ts";
 
 // QuickPerm https://www.quickperm.org/
 export function permute<T>(items: T[]): T[][] {
@@ -7,7 +7,7 @@ export function permute<T>(items: T[]): T[][] {
     const p = copyOfItems.map((_, index) => index);
     p.push(copyOfItems.length);
     let i = 1;
-    let results: T[][] = [];
+    const results: T[][] = [];
     while(true) {
         results.push(copyOfItems.slice(0));
         if (i >= N) break;
