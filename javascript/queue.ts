@@ -1,7 +1,6 @@
-
 export class Queue<T> {
   private queue: T[];
-  
+
   constructor() {
     this.queue = [];
   }
@@ -18,7 +17,6 @@ export class Queue<T> {
     this.queue = this.queue.slice(1);
     return val;
   }
-
 
   public peek(): T | null {
     if (this.size() === 0) {
@@ -37,17 +35,4 @@ export class Queue<T> {
   public size(): number {
     return this.queue.length;
   }
-
-}
-
-const q = new Queue<number>();
-
-q.enqueue(1);
-q.enqueue(2);
-q.enqueue(3);
-q.enqueue(3);
-q.enqueue(2);
-q.enqueue(100);
-while(q.size() > 0) {
-  console.log(q.dequeue());
 }

@@ -29,13 +29,3 @@ export class Stack<T> {
     return this.stack.length;
   }
 }
-
-const s = new Stack<number>(); 
-
-s.push(1);
-s.push(2);
-s.push(3);
-console.log(s.peek());
-while(s.size() > 0) {
-  console.log(s.pop());
-}

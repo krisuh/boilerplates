@@ -3,8 +3,8 @@
  * https://en.wikipedia.org/wiki/Trie
  */
 
-import { isNil } from "./isNil.ts";
-import { Stack } from "./stack.ts";
+import { isNil } from './isNil.ts';
+import { Stack } from './stack.ts';
 
 interface TrieNode<T> {
   [key: string]: TrieNode<T> | T;
@@ -20,7 +20,7 @@ export class Trie<T> {
   public add(word: string, value: T) {
     let temp = this.root;
     let rest = word;
-    while(rest.length > 0) {
+    while (rest.length > 0) {
       const key = rest.charAt(0);
       const child = temp[key] ?? {};
       temp[key] = child;
@@ -31,7 +31,7 @@ export class Trie<T> {
   }
 
   public get(word: string): TrieNode<T> | null {
-    let pointer: TrieNode<T>= this.root;
+    let pointer: TrieNode<T> = this.root;
     let rest = word;
     while (rest.length > 0) {
       const key = rest.charAt(0);
@@ -63,12 +63,12 @@ export class Trie<T> {
     }
     const unvisited = new Stack<TrieNode<T>>();
     unvisited.push(node);
-    while(unvisited.size() > 0) {
+    while (unvisited.size() > 0) {
       const n = unvisited.pop();
       if (n && n['value']) {
         results.push(n);
       }
-      Object.entries(n ?? {}).forEach(([ key, value ]) => {
+      Object.entries(n ?? {}).forEach(([key, value]) => {
         if (key !== 'value') {
           unvisited.push(value ?? {});
         }
@@ -79,25 +79,6 @@ export class Trie<T> {
 
   public getValuesInPath(word: string): T[] {
     const leaves = this.getLeaves(word);
-    return leaves.map(leaf => leaf['value'] as T);
+    return leaves.map((leaf) => leaf['value'] as T);
   }
-
 }
-const start = new Date();
-const t = new Trie<string>();
-t.add('hello', 'greeting');
-t.add('hell', 'hell yeah');
-t.add('hel', 'Helsinki');
-t.add('app', 'sovellus');
-t.add('apple', 'omena');
-
-console.log(t.getValue('hello'));
-console.log(t.get('hell'));
-console.log(t.get('hel'));
-console.log(t.get('he'));
-console.log(t.get('app'));
-console.log(t.get('apple'));
-const end = new Date();
-const diff = end.getTime() - start.getTime();
-console.log('took', diff, 'milliseconds');
-console.log(t.getValuesInPath('hell'));
