@@ -2,6 +2,8 @@ package collection
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 type Person struct {
@@ -21,12 +23,13 @@ func TestGroupBy(t *testing.T) {
 		return p.FirstName
 	})
 	keys := gatherKeys(byFirstName)
-	if len(keys) < 3 {
-		t.Error("Not enough groups")
-	}
-	if keys[0] != "Erkki" {
-		t.Error("Erkki not found in Keys")
-	}
+	assert.Equal(t, []string{"Erkki", "Max", "Liisa"}, keys)
+	erkki := byFirstName["Erkki"]
+	max := byFirstName["Max"]
+	liisa := byFirstName["Liisa"]
+	assert.Equal(t, 1, len(erkki))
+	assert.Equal(t, 2, len(max))
+	assert.Equal(t, 1, len(liisa))
 	t.Log(byFirstName)
 }
 
