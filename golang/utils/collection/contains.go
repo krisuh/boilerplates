@@ -8,3 +8,12 @@ func ContainsBy[T any](items []T, predicate Predicate[T]) bool {
 	}
 	return false
 }
+
+func Contains[T comparable](items []T, a T) bool {
+	for _, item := range items {
+		if a == item {
+			return true
+		}
+	}
+	return false
+}
