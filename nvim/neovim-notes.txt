@@ -1,0 +1,2 @@
+Plugin installer: Vim-Plug https://github.com/junegunn/vim-plug
+LSP installer coc.nvim https://github.com/neoclide/coc.nvim/
